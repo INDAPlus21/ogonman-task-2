@@ -14,45 +14,42 @@ fn main() {
         .map(|_line| _line.ok().unwrap());
 
 
-    let nmrTimes = lines
+    let nmr_times = lines
         .next().unwrap()
         .trim()
         .parse::<usize>().ok().unwrap(); 
 
-    eprintln!("\n number of numbers: {}\n", nmrTimes);
+    eprintln!("\n number of numbers: {}\n", nmr_times);
 
     
-    let addNmr;
-    if nmrTimes%2 == 0{
-        addNmr = nmrTimes/2;
+    let add_nmr;
+    if nmr_times%2 == 0{
+        add_nmr = nmr_times/2;
     }else{
-        addNmr = (nmrTimes+1)/2;
+        add_nmr = (nmr_times+1)/2;
     }
 
-    eprintln!("\n number of adding numbers: {}\n", addNmr);
+    eprintln!("\n number of adding numbers: {}\n", add_nmr);
 
 
-    for _case in 0..nmrTimes{
 
         let mut numbers = lines
             .next().unwrap()
             .split(" ")
-            .map(|component| component.parse::<usize>().ok().unwrap())
-            .collect::<Vec<usize>>();
+            .map(|component| component.parse::<u32>().ok().unwrap())
+            .collect::<Vec<u32>>();
     
         numbers.sort();
 
         eprintln!("\n The numbers are: {:?} \n", numbers);
 
-        let mut result: usize = 0;
+        let mut result: u32 = 0;
 
-        for _times in (addNmr-1)..nmrTimes{
+        for _times in (add_nmr-1)..nmr_times{
             result = result + numbers[_times];
         }
     
         println!("{}", result);
-        break;
-    }
 
 
 }
