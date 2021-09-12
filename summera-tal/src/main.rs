@@ -16,7 +16,8 @@ fn main() {
 
     let nmrTimes = lines
         .next().unwrap()
-        .parse::<usize>().unwrap(); 
+        .trim()
+        .parse::<usize>().ok().unwrap(); 
 
     eprintln!("\n number of numbers: {}\n", nmrTimes);
 
@@ -31,13 +32,12 @@ fn main() {
     eprintln!("\n number of adding numbers: {}\n", addNmr);
 
 
-
     for _case in 0..nmrTimes{
 
         let mut numbers = lines
             .next().unwrap()
             .split(" ")
-            .map(|component| component.parse::<usize>().unwrap())
+            .map(|component| component.parse::<usize>().ok().unwrap())
             .collect::<Vec<usize>>();
     
         numbers.sort();
