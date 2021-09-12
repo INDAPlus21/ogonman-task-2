@@ -8,6 +8,7 @@ fn main() {
 
     // get input lines as strings
     // see: https://doc.rust-lang.org/std/io/trait.BufRead.html
+
     let mut lines = input
         .lock()
         .lines()
@@ -15,38 +16,35 @@ fn main() {
 
 
     let nmr_times = lines
-        .next().unwrap()
-        .trim()
-        .parse::<usize>().ok().unwrap(); 
-
-    eprintln!("\n number of numbers: {}\n", nmr_times);
-
+    .next().unwrap()
+    .trim()
+    .parse::<usize>().ok().expect("Error"); 
     
     let add_nmr;
     if nmr_times%2 == 0{
         add_nmr = nmr_times/2;
+        eprintln!("Is even");
     }else{
-        add_nmr = (nmr_times+1)/2;
+        add_nmr = (nmr_times+1)/2-1;
+        eprintln!("Is odd");
     }
 
-    eprintln!("\n number of adding numbers: {}\n", add_nmr);
-
-
+    eprintln!("{}", add_nmr);
 
         let mut numbers = lines
-            .next().unwrap()
+            .next().expect("Error")
+            .trim()
             .split(" ")
-            .map(|component| component.parse::<u32>().ok().unwrap())
+            .map(|component| component.parse::<u32>().ok().expect("Error"))
             .collect::<Vec<u32>>();
     
         numbers.sort();
 
-        eprintln!("\n The numbers are: {:?} \n", numbers);
-
         let mut result: u32 = 0;
 
-        for _times in (add_nmr-1)..nmr_times{
+        for _times in add_nmr..nmr_times{
             result = result + numbers[_times];
+            eprintln!("{}", numbers[_times])
         }
     
         println!("{}", result);
